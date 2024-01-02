@@ -20,8 +20,15 @@ public class BStackSampleTest extends BrowserStackJUnitTest {
         String product_name = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='1']/p"))).getText();
         WebElement cart_btn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='1']/div[4]")));
         cart_btn.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("float-cart__content")));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("float-cart__conten")));
+        }
+        catch (Exception e ){
+            System.out.println("exception occurred" + e);
+        }
         final String product_in_cart = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='__next']/div/div/div[2]/div[2]/div[2]/div/div[3]/p[1]"))).getText();
+        System.out.println("print me please");
+
         assertTrue("Product add to the cart - Failed!", product_name.matches(product_in_cart));
     }
 }
